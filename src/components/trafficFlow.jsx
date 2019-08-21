@@ -151,17 +151,27 @@ class TrafficFlow extends React.Component {
   }
 
   beginSampleData () {
-    this.traffic = { nodes: [], connections: [] };
-    request.get('sample_data.json')
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-        if (res && res.status === 200) {
-          this.traffic.clientUpdateTime = Date.now();
-          this.updateData(res.body);
-        }
-      });
+    setInterval(()=>{
+      this.bringNewData();
+    },1000)
   }
 
+  bringNewData(){
+    //console.log("This is repeatRol");
+    this.traffic = { nodes: [], connections: [] };
+    request.get("http://localhost:8081")
+    .set('Accept', 'application/json')
+    .set('Access-Control-Allow-Origin','*')
+    .end((err,res) => {
+      //console.log(JSON.stringify(res.text));
+      console.log("This is repeatRol end atte");
+      if (res && res.status === 200) {
+        this.traffic.clientUpdateTime = Date.now();
+        this.updateData(JSON.parse(res.text));
+        //alert(res.body);
+      }
+    });
+  }
   componentDidMount () {
     this.checkInitialRoute();
     this.beginSampleData();
