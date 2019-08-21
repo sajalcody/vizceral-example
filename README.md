@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/Netflix/vizceral/master/logo.png)
 
-# Vizceral Example
+# Vizceral Example Edit: Fetching realtime data from Prometheus
 This is a sample application using the [React wrapper](https://github.com/Netflix/vizceral-react) around the [vizceral](https://github.com/Netflix/vizceral) graph.
 For more details about using vizceral in your own projects with your own data, refer to the above repositories.
 
@@ -13,8 +13,13 @@ For more details about using vizceral in your own projects with your own data, r
    npm install
    npm run dev
    ```
+2. Open nix-shell and run the following commands
+$ cabal new-build
+$ cabal new-run
 
-2. Open `localhost:8080` in your browser.
+Now open `localhost:8081`, where you can see a json object which is the output of prometheus query being hit from haskell code.
+
+3. Open `localhost:8080` in your browser.
 
 ##### Using Docker
 If you don't have a node environment setup or would like to run this example on a platform, there is a Dockerfile for experimental usage.
